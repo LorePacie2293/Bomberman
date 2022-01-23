@@ -1,0 +1,42 @@
+# Project: Bomberman
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = Bomberman_private.res
+OBJ      = main.o bomberman.o mappa.o armi.o $(RES)
+LINKOBJ  = main.o bomberman.o mappa.o armi.o $(RES)
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -pg
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = Bomberman.exe
+CXXFLAGS = $(CXXINCS) -pg
+CFLAGS   = $(INCS) -pg
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+bomberman.o: bomberman.c
+	$(CC) -c bomberman.c -o bomberman.o $(CFLAGS)
+
+mappa.o: mappa.c
+	$(CC) -c mappa.c -o mappa.o $(CFLAGS)
+
+armi.o: armi.c
+	$(CC) -c armi.c -o armi.o $(CFLAGS)
+
+Bomberman_private.res: Bomberman_private.rc 
+	$(WINDRES) -i Bomberman_private.rc --input-format=rc -o Bomberman_private.res -O coff 
+
